@@ -10,3 +10,9 @@ Usage is outlined in the app.
 
 ## Features, Issues, and Collaboration
 If there are any features you wish to see included or issues that need to be fixed, please raise an issue. Better yet, fork the project and push your own contribution!
+
+## Legal
+None of the information you enter is sent to Help.com. Please note that Help.com and the NDA Generator do NOT provide any legal counsel or make any representations about the documents themselves. Use at your own risk and customize to whatever extent you think is appropriate.
+
+## Thank You
+All generation is done through the Google Script service. Thanks to the Google Caja, Bootstrap, jQuery, and jQueryUI teams.
