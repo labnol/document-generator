@@ -15,4 +15,4 @@ If there are any features you wish to see included or issues that need to be fix
 None of the information you enter is sent to Help.com. Please note that Help.com and the NDA Generator do NOT provide any legal counsel or make any representations about the documents themselves. Use at your own risk and customize to whatever extent you think is appropriate.
 
 ## Thank You
-All generation is done through the Google Script service. Thanks to the [Google Caja](https://code.google.com/p/google-caja/), [Bootstrap](http://www.getbootstrap.com/), [jQuery](http://www.jquery.com/), and [jQueryUI](http://www.jqueryui.com/) teams.
+All generation is done through the [Google Script](https://script.google.com) service. Thanks to the [Google Caja](https://code.google.com/p/google-caja/), [Bootstrap](http://www.getbootstrap.com/), [jQuery](http://www.jquery.com/), and [jQueryUI](http://www.jqueryui.com/) teams.
