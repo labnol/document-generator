@@ -1,0 +1,396 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />
+<style>
+  h3 {
+    margin-bottom: 1em;
+  }
+ 
+  mark {
+    background-color: #ff0;
+  }
+
+  .start, #title, #confirmation {
+    display: none;
+  }
+ 
+  .btn-info {
+    float: right;
+  }
+ 
+  .error {
+    display: none;
+    color: #f00;
+    margin-top: 2em;
+  }
+
+  #app {
+    font-family: Open Sans;
+    font-size: 16px;
+    padding: 3em;
+    margin: 0 auto;
+    width: 30em;
+  }
+ 
+  #logo {
+    width: 100%;
+    margin-bottom: 1em;
+    display: none;
+  }
+ 
+  #copy-template, #edit-template-wrapper {
+    width: 100%;
+    float: none;
+  }
+  
+  #copy-template, #edit-template {
+      margin: 0 0 1em 0;
+  }
+ 
+  #edit-template {
+    display: block;
+  }
+ 
+  #form-generate {
+    margin-top: 2em;
+  }
+ 
+  #title {
+    margin-bottom: 1em;
+  }
+ 
+  #recipient-address-group, #recipient-signer-group {
+    display: none;
+  }
+ 
+  #recipient-address-group input {
+    margin-top: 0.5em;
+  }
+ 
+  #recipient-address-city {
+    width: 15em;
+    margin-right: 0.5em;
+    display: inline-block;
+  }
+ 
+  #recipient-address-state {
+    width: 4em;
+    margin-right: 0.5em;
+    display: inline-block;
+  }
+ 
+  #recipient-address-zip {
+    width: 6em;
+    display: inline-block;
+    float: right;
+  }
+ 
+  #nda-link {
+    margin-bottom: 1em;
+  }
+ 
+  #email-success {
+    display: none;
+  }
+ 
+  #thanks {
+    font-size: 0.8em;
+  }
+</style>
+
+<div id="app">
+  <img id="logo" src="http://www.help.com/skin/images/nav-logo-dark.svg"/>
+  
+  <h1 id="title">NDA Generator</h1>
+  
+  <p class="start">This is the NDA Generator by Help.com. You must have
+    the Google Doc <code>_help.com-nda-generator-template</code> in your Drive.
+  </p>
+  
+  <div id="nda-type-group">
+    <p class="form-group start">
+      <label for="nda-type">NDA Type:</label>
+      <select class="form-control" id="nda-type">
+        <option value="one-way">One-Way</option>
+        <option value="mutual">Mutual</option>
+      </select>
+    </p>
+  
+    <button class="btn btn-info start" id="copy-template">Copy Template to Your Drive</button>
+    <div class="start" id="edit-template-wrapper">
+      <a href="#" target="_blank" class="btn btn-danger" id="edit-template">Edit Template</a>
+    </div>
+  </div>
+  
+  <p class="start">
+    Before running the NDA Generator, read over the NDA and replace any <mark>Highlighted Text</mark> with details about your company.
+  </p>
+  
+  <p class="start">
+    The following keywords can be used and will be replaced by the generator:
+    <code>{USERNAME}</code>,
+    <code>{USERTITLE}</code>,
+    <code>{RECIPIENTNAME}</code>,
+    <code>{RECIPIENTTITLE}</code>,
+    <code>{RECIPIENTTYPE}</code>,
+    <code>{RECIPIENTSIGNER}</code>,
+    <code>{RECIPIENTADDRESS}</code>,
+    <code>{DATE}</code>.
+  </p>
+  
+  <p class="start">
+    If you see an issue or want to request a feature, go to <a href="https://www.github.com/helpdotcom/nda-generator" target="_blank">GitHub</a> or <a href="https://www.bitbucket.org/helpdotcom/nda-generator" target="_blank">Bitbucket</a>.
+    Better yet,
+    <a href="https://script.google.com/a/help.com/d/1_s52hnc-UkYEBXI6mGUg7Ua27Rk8e3vkrx4xO3fKpn4kwis8ZqrFWJ7Y/edit?usp=sharing">
+      copy the script
+    </a> and contribute!
+  </p>
+   
+  <p id="thanks" class="start">
+    Thanks to the <a href="https://code.google.com/p/google-caja/" target="_blank">Google Caja</a>,
+    <a href="http://www.getbootstrap.com" target="_blank">Bootstrap</a>,
+    <a href="http://www.jquery.com" target="_blank">jQuery</a>, and
+    <a href="http://www.jqueryui.com" target="_blank">jQueryUI</a> teams.
+  </p>
+  
+  <form id="form-generate" class="start">
+    <div class="form-group">
+      <label for="user-name">Your Name:</label>
+      <input type="text" class="form-control" id="user-name" placeholder="Sterling Archer" required />
+    </div>
+    <div class="form-group">
+      <label for="user-title">Your Title:</label>
+      <input type="text" class="form-control" id="user-title" placeholder="Secret Agent" required />
+    </div>
+    
+    <br/>
+    
+    <div class="form-group">
+      <label for="recipient-name">Recipient's Name / Company:</label>
+      <input type="text" class="form-control" id="recipient-name" placeholder="Dr. Algernop Krieger" required />
+    </div>
+    <div class="form-group">
+      <label for="recipient-type">Recipient Type:</label>
+      <select class="form-control" id="recipient-type">
+        <option value="individual">Individual</option>
+        <option value="corporation">Corporation</option>
+        <option value="llc">LLC (Limited Liability Company)</option>
+      </select>
+    </div>
+    <div class="form-group" id="recipient-signer-group">
+      <label for="recipient-signer">Recipient Signer</label>
+      <input type="text" class="form-control" id="recipient-signer" placeholder="Dr. Algernop Krieger" />
+    </div>
+    <div class="form-group">
+      <label for="recipient-title">Recipient's Title:</label>
+      <input type="text" class="form-control" id="recipient-title" placeholder="Self" value="Self" required />
+    </div>
+    <div id="recipient-address-group" class="form-group">
+      <label for="recipient-address-line1">Recipient's Address:</label>
+      <input type="text" class="form-control recipient-address" id="recipient-address-line1" placeholder="123 Alphabet Street" />
+      <input type="text" class="form-control" id="recipient-address-line2" placeholder="Apartment 456" />
+      <input type="text" class="form-control recipient-address" id="recipient-address-city" placeholder="Austin" />
+      <input type="text" class="form-control recipient-address" id="recipient-address-state" placeholder="TX" />
+      <input type="text" class="form-control recipient-address" id="recipient-address-zip" placeholder="78701" />
+    </div>
+    
+    <br/>
+    
+    <div class="form-group">
+      <label for="date">Effective Date:</label>
+      <input type="date" class="form-control" id="date" required />
+    </div>
+    <button type="submit" class="btn btn-info">Generate NDA</button>
+    
+    <div class="clearfix"></div>
+    
+    <div class="error" id="error-404">
+      The template file couldn't be found. Please ensure that it is in your Drive with the exact name of
+      <code>_help.com-nda-generator-template</code>.
+    </div>
+  </form>
+  <div id="confirmation">
+    <h3>Congratulations! Your NDA has been generated.</h3>
+    
+    <a href="#" id="nda-link" class="btn btn-success" target="_blank">Open NDA</a>
+    
+    <form id="form-email">
+      <div class="form-group">
+        <label for="email-recipient">Recipient's E-Mail:</label>
+        <input type="email" class="form-control" id="email-recipient" placeholder="thisisnotanillegaluraniamdealer@hotmail.com" required />
+      </div>
+      <div class="form-group">
+        <label for="email-subject">E-Mail Subject:</label>
+        <input type="text" class="form-control" id="email-subject" required />
+      </div>
+      <div class="form-group">
+        <label for="email-body">E-Mail Body:</label>
+        <textarea id="email-body" class="form-control" rows="10"></textarea>
+        <span class="help-block">Basic HTML can be used in the body.</span>
+      </div>
+      <button type="submit" id="nda-email" class="btn btn-info">Email NDA to Recipient</button>
+    </form>
+    
+    <div id="email-success">
+      E-Mail has been sent successfully.
+    </div>
+  </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script>
+  // Define callbacks.
+  /**
+   * Confirm if the NDA has been generated or not.
+   *
+   * @method showNdaConfirmation
+   * @param {Object} response - NDA generation response.
+   */
+  function showNdaConfirmation(response) {
+    if (response.error) {
+      switch (response.error) {
+        case 404:
+          $('#error-404').fadeIn();
+        break;
+      }
+  
+      $('#form-generate').find('input, button').removeAttr('disabled');
+      $('#form-generate').animate({ opacity: 1 });
+  
+      return;
+    }
+    
+    // Set listeners.
+    $('#form-email').submit(function() {
+      $(this).find('input, button').attr({ disabled: 'disabled' });
+      $(this).animate({ opacity: 0.25 });
+   
+      var details = {
+        recipientEmail: $('#email-recipient').val(),
+        userName: response.details.userName,
+        subject: $('#email-subject').val(),
+        body: $('#email-body').val()
+      };
+   
+      google.script.run.withSuccessHandler(showEmailConfirmation).sendEmail(details);
+    });
+    
+    // Set HTML.
+    $('#nda-link').attr({ href: response.url });
+    var recipientName = typeof response.details.recipientType === 'individual' ? response.details.recipientName.split(' ')[0] : response.details.recipientName;
+    $('#email-body').val('Hi ' + recipientName + ',\n\n<a href="' + response.url + '">Click here</a> to review the NDA.');
+  
+    // Render view.
+    $('.start').fadeOut(function() {
+      $('#confirmation').fadeIn();
+    });
+  }
+ 
+  /**
+   * Confirm that the NDA E-Mail has been sent to the recipient.
+   *
+   * @method showEmailConfirmation
+   */
+  function showEmailConfirmation() {
+    $('#form-email').fadeOut(function() {
+      $('#email-success').fadeIn();
+    });
+  }
+
+  /**
+   * Confirm the the NDA template has been copied into the active user's drive.
+   *
+   * @method showCopyConfirmation
+   */
+  function showCopyConfirmation(url) {
+    $('#copy-template').fadeOut(function() {
+      $('#edit-template').removeAttr('disabled').attr({ href: url }).parent().fadeIn();
+      $('#nda-type-group').animate({ opacity: 1 }).find('input, select').removeAttr('disabled');
+    });
+  }
+
+  /**
+   * Confirm that the template exists in the Drive. If so, hide the copy button
+   * and show the edit button.
+   *
+   * @method templateSearchConfirmation
+   * @param {Object} ndaTemplateSearch - Search results for the template.
+   */
+  function templateSearchConfirmation(ndaTemplateSearch) {
+    if (ndaTemplateSearch) {
+      $('#copy-template').fadeOut(function() {
+        $('#edit-template').attr({ href: ndaTemplateSearch.url }).parent().fadeIn();
+      });
+    } else {
+      $('#edit-template-wrapper').fadeOut(function() {
+        $('#copy-template').fadeIn();
+      });
+    }
+    
+    $('#nda-type-group').animate({ opacity: 1 }).find('input, select').removeAttr('disabled');
+  }
+
+  // Set listeners.
+  $('#nda-type').change(function() {
+    $('#nda-type-group').animate({ opacity: 0.25 }).find('input, select').attr({ disabled: 'disabled' });
+    google.script.run.withSuccessHandler(templateSearchConfirmation).isTemplateFound($(this).val());
+  });
+  
+  $('#recipient-type').change(function() {
+    if ($(this).val() === 'individual') {
+      $('#recipient-signer-group').slideUp(function() {
+        $('#recipient-signer').removeAttr('required');
+      });
+      $('#recipient-address-group').slideUp(function() {
+        $('.recipient-address').removeAttr('required');
+        $('#recipient-title').val('Self').attr({ required: 'required' }).parent().slideDown();
+      });
+    } else {
+      $('#recipient-signer').attr({ required: 'required' });
+      $('.recipient-address').attr({ required: 'required' });
+      $('#recipient-title').val('').removeAttr('required').parent().slideUp(function() {
+        $('#recipient-address-group').slideDown();
+        $('#recipient-signer-group').slideDown();
+      });
+    }
+  });  
+ 
+  $('#form-generate').submit(function() {
+    $(this).find('input, button').attr({ disabled: 'disabled' });
+    $(this).animate({ opacity: 0.25 });
+  
+    var details = {
+      userName: $('#user-name').val(),
+      userTitle: $('#user-title').val(),
+      recipientName: $('#recipient-name').val(),
+      recipientType: $('#recipient-type').val(),
+      recipientTitle: $('#recipient-title').val(),
+      recipientAddress: $('#recipient-address-line1').val() + ', '
+                        + $('#recipient-address-line2').val() + ', '
+                        + $('#recipient-address-city').val() + ', '
+                        + $('#recipient-address-state').val() + ' '
+                        + $('#recipient-address-zip').val(),
+      recipientSigner: $('#recipient-signer').val(),
+      ndaType: $('#nda-type').val(),
+      date: $('#date').val()
+    };
+  
+    google.script.run.withSuccessHandler(showNdaConfirmation).generateNda(details);
+  });
+ 
+  $('#copy-template').click(function() {
+    $('#nda-type-group').animate({ opacity: 0.25 }).find('input, select').attr({ disabled: 'disabled' });
+    google.script.run.withSuccessHandler(showCopyConfirmation).copyTemplate($('#nda-type').val());
+  });
+
+  // Render view.
+  $('#date').val(new Date().toJSON().slice(0,10));
+  $('img').fadeIn(function() {
+    $('#title').fadeIn(function() {
+      $('#app p, #app button').fadeIn(function() {
+        google.script.run.withSuccessHandler(templateSearchConfirmation).isTemplateFound('one-way');
+        $('#form-generate').fadeIn();
+      });
+    });
+  });
+</script>
